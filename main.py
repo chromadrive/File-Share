@@ -1,3 +1,4 @@
+import util
 from room import Room
 from flask import Flask, request, render_template, redirect
 try:
@@ -13,7 +14,10 @@ rooms = {}
 
 @app.route('/', methods=['GET'])
 def index():
-    room_code = "TEST" # for testing, should obviously be changed to random later
+    room_code = str(util.generate_room_code()) # for testing, should obviously be changed to random later
+    while room_code.upper() in rooms:
+        room_code = str(util.generate_room_code())
+    room_code = room_code.upper()
     new_room = Room(room_code)
     rooms[room_code] = new_room
     print("Created room " + room_code)
@@ -21,9 +25,11 @@ def index():
 
 @app.route('/<room_code>') # Reached with <host>/<room_code>
 def join_room(room_code):
+    room_code = room_code.upper()
     print(room_code)
+    print(rooms)
     if room_code in rooms:
-        return render_template('room.html')
+        return render_template('room.html', room_code = room_code)
     else:
         return render_template('404.html')
 
