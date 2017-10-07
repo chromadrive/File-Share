@@ -459,15 +459,15 @@ a:visited, a:link {
     <input type="submit" value="Upload File"/>
     </form>
       <ul id="item-list">
-        {%for file in room.files%}
-          <li class="item">
-            <img src="{{group.picture.url}}" alt="no image"/>
-            <div>
-              <a class="item-name" href="#">{{group.name}}</a>
-              <p class="item-category">{{group.info}}</p>
-            </div>
-          </li>
-        {%endfor%}
+        {% for filename, sender in room.fileDict.iteritems() %}
+          {% if sender != 'hi' %}
+            <li class="item">
+              <p class="item-category">sender:{{ sender }}</p>
+              <p class="item-category">user_id:{{ user_id }}</p>
+                <p class="item-category">{{ filename }}</p>
+            </li>
+          {% endif %}
+        {% endfor %}
       </ul>
     </div>
   </div>

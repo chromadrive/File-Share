@@ -47,27 +47,31 @@ def index():
 
 @app.route('/<room_code>', methods=['GET', 'POST']) # Reached with <host>/<room_code>
 def join_room(room_code):
-    room_code = room_code.upper()
+    
+    room_code = room_code.upper().decode("utf-8")
     room = rooms[room_code]
     print(room_code)
     print(rooms)
     if request.method == 'POST':
-        print('hi')
-        f = request.files['file']
-        name = room_code + "" + f.filename
+        uploadedFile = request.files['file']
+        filename = uploadedFile.filename
+        name = room_code + "" + filename
         print(name)
-        f.save(secure_filename(name))
-        room.addFile()
+        uploadedFile.save(secure_filename(name))
+        user_id = util.get_user_info()
+        room.addFile(filename, user_id)
         #print(tempfile.gettempdir())
-        return 'success! :o'
+        return render_template('room.html', room = room, user_id = user_id)
 
-    if request.method == 'GET':
-    	print('getting')
-    	fileget = request.form['submit']
-    	return redirect(host + "" + room_code + "/" + fileget)
+    #if request.method == 'GET':
+    	#print('getting')
+        #if 'submit' in request.form:
+        	#fileget = request.form['submit']
+        	#return redirect(host + "" + room_code + "/" + fileget)
     if room_code in rooms:
         room = rooms[room_code]
-        return render_template('room.html', room = room)
+        user_id = util.get_user_info()
+        return render_template('room.html', room = room, user_id = user_id)
     else:
         return render_template('404.html')
 
@@ -90,6 +94,7 @@ def test_message(message):
 def handle_message(message):
     send(message)
 
+"""
 @socketio.on('join')
 def on_join(data):
     for room in rooms:
@@ -97,7 +102,7 @@ def on_join(data):
         if data['room_code'] == room.room_code:
             join_room(room)
             send(username + 'has entered the room.', room=room)
-
+"""
 # Start app
 if __name__ == '__main__':
     socketio.run(app)
