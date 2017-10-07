@@ -7,8 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cuotiben - Groups</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!---<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+  <script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    $('form#upload').submit(function(event) {
+      alert($('#file').val());
+      socket.emit('upload', {data: $('#file').val()});
+    });
+
+  });
+
+  </script>
+
+
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <style>
@@ -439,6 +454,10 @@ a:visited, a:link {
   <div class="container">
     <div id="groupContainer">
       <h2> Room Code: {{room_code}}</h2>
+      <form id="upload" action="#" method="POST" enctype="multipart/form-data">
+    <input id="file" type="file" name="file"/>
+    <input type="submit" value="Upload File"/>
+    </form>
       <ul id="item-list">
         {%for group in groups%}
           <li class="item">
