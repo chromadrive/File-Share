@@ -37,26 +37,27 @@ def index():
                 print("User info======" + util.get_user_info())
                 return redirect(host + "" + room_code + "")
             else:
-                for room in rooms:
-                    if (room.room_code == groupname):
-                        return redirect(host + "" + room_code + "")
-                return "no group with that name found :("
+                if groupname in rooms:
+                    return redirect(host + "" + groupname + "")
+                else:
+                    return "no group with that name found :("
 
         return render_template('index.html')
 
 @app.route('/<room_code>', methods=['GET', 'POST']) # Reached with <host>/<room_code>
 def join_room(room_code):
     room_code = room_code.upper()
+    room = rooms[room_code]
     print(room_code)
     print(rooms)
     if request.method == 'POST':
         print('hi')
         f = request.files['file']
-        name = room_code + "/" + f.filename
+        name = room_code + "" + f.filename
         print(name)
         f.save(secure_filename(name))
         #print(tempfile.gettempdir())
-        return 'success! :o'
+        return render_template('room.html', room = room)
     if room_code in rooms:
         room = rooms[room_code]
         return render_template('room.html', room = room)
