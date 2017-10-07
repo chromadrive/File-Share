@@ -425,12 +425,7 @@ a:visited, a:link {
 <body>
   <header class="top-header">
     <nav class="top-nav">
-      <a href="../problem/">Problems</a>
-      <a href="../groups/">Groups</a>
-      <a href="../public/">Community</a>
-      <a href="../recommend/">Recommended</a>
-      <a href="../about/">About</a>
-
+      <a href="">Sharesnap</a>
     </nav>
 
     <nav class="top-right-nav">
@@ -438,54 +433,18 @@ a:visited, a:link {
       <a href="uploadproblem.html">
         <img id="upload-icon" alt="Upload" class="icon icons8-Upload" width="32" height="32" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAZBJREFUeAHtmVEKwjAQRK038jb+6kX04EqdhRbStW02BXe3dQJBA0lm5mVJPno6sZEACZAACZAACUQQ6Pv+Kj1CO1wTwW/or6Hfwg15GkDoO/obfWzy/+7pIUxLgqKX4f8Hwkr440MwhD8uhIbwx4OwEH7pDhgByO/+L8aV8HIR6jZ3Oe4XAtKtBtLp5VmqrQl7ulqFLUHmABwCgiX8EHTCoIRs3aNck+J/i/FJegx0gJa99NqQcavhGgAJ0bpnSPCtRi0Atu7tCgJBLuj6Xa8+X1YAFQgX17BLYgjzKAJVww+hiiXfd4DWwmT9rD71nNAxDD7QTeHFKOZOmsU8FowQnpb57nNg0FySk/QYWM22aFj27CyTfjFHAJT7dmjl2Ov/2Usoqw4BZD0ZL1+sAC/SWXVYAVlPxssXK8CLdFYdVkDWk/HyxQrwIp1VhxWQ9WS8fLECvEhn1WEFZD0ZL1+sAC/S1CEBEiCBjAQ2f43RX3aiw239ssRnMPrkovX/vgKiD4D6JEACJEACJEACcQQ++NW4KDoI9SIAAAAASUVORK5CYII=" >
       </a>
-      <span id="welcome-msg"></span>
-      <a id="logout-link" href="LogoutServlet">Logout</a>
-      <i id="avatar" class="avatar fa fa-user fa-2x"></i>
     </nav>
   </header>
 
-
-
   <div class="container">
-    <header>
-      <p>
-        <span>Cuotiben</span>
-        <br /> Powered by UCBMFET
-      </p>
-    </header>
-    <!--
-    <section class="main-section">
-      <div id="login-form">
-      <label for="username">Username:</label>
-      <input id="username" name="username" type="text">
-      <label for="password">Password:</label>
-      <input id="password" name="password" type="password">
-      <button id="login-btn">Login</button>
-      <p id="login-error"></p>
-    </div>
-    -->
-    <div id="uploadProb">
-      <a href="../creategroup/" id="newGroupButton">Create a Group</a>
-    </div>
-
     <div id="groupContainer">
       <ul id="item-list">
-        <h3>My Groups</h3>
         {%for group in groups%}
-
           <li class="item">
             <img src="{{group.picture.url}}" alt="no image"/>
             <div>
               <a class="item-name" href="#">{{group.name}}</a>
               <p class="item-category">{{group.info}}</p>
-
-            </div>
-            <p class="item-notification"> <a href="#">2 New</a></p>
-
-            <p class="item-upload"><a href="uploadproblem.html">Upload to group</a></p>
-
-            <div class="fav-link">
-              <i class="fa fa-heart"></i>
             </div>
           </li>
         {%endfor%}
@@ -493,36 +452,6 @@ a:visited, a:link {
     </div>
   </div>
 
-  <div id="wrapper">
-
 </div>
-
-<!--
-<div id="footer">
-  <p class="title">What We Do</p>
-  <p>"Help you become the best version of yourself."</p>
-  <ul>
-    <li>
-      <p><i class="fa fa-map-o fa-2x"></i></p>
-      <p>Berkeley, CA</p>
-    </li>
-    <li>
-      <p><i class="fa fa-envelope-o fa-2x"></i></p>
-      <p>info@cuotiben.com</p>
-    </li>
-    <li>
-      <p><i class="fa fa-phone fa-2x"></i></p>
-      <p>+1 000 000 0000</p>
-    </li>
-  </ul>
-
-</div>
-
--->
-
-  <script src="https://rawgit.com/emn178/js-md5/master/build/md5.min.js"></script>
-  <!--<a href="https://icons8.com">Icon pack by Icons8</a> -->
-
-  <script src="scripts/main.js"></script>
 </body>
 </html>
