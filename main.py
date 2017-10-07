@@ -37,9 +37,9 @@ def join_room(room_code):
     room_code = room_code.upper()
     print(room_code)
     print(rooms)
-    return render_template('room.html', room_code = room_code)
     if room_code in rooms:
-        return render_template('room.html', room_code = room_code)
+        room = rooms[room_code]
+        return render_template('room.html', room = room)
     else:
         return render_template('404.html')
 
