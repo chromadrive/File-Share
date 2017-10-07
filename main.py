@@ -3,7 +3,7 @@ from room import Room
 from client import Client
 from flask import Flask, request, render_template, redirect
 from flask_socketio import SocketIO, emit, send, join_room, leave_room, rooms
-
+from werkzeug.utils import secure_filename
 try:
     from urllib.parse import urlparse  # Python 3
 except ImportError:
@@ -19,33 +19,59 @@ socketio = SocketIO(app)
 
 rooms = {}
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
+        if request.method == 'POST':
+            result = request.form
+            groupname = result['file']
+            print(groupname)
+            if (groupname == ""):
+                room_code = str(util.generate_room_code()) # for testing, should obviously be changed to random later
+            #while room_code.upper() in rooms:
+            #    room_code = str(util.generate_room_code())
+                room_code = room_code.upper()
+                new_room = Room(room_code)
+                rooms[room_code] = new_room
+                print("Created room " + room_code)
+                print("User info======" + util.get_user_info())
+                return redirect(host + "" + room_code + "")
+            else:
+                for room in rooms:
+                    if (room.room_code == groupname):
+                        return redirect(host + "" + room_code + "")
+                return "no group with that name found :("
 
-    room_code = str(util.generate_room_code()) # for testing, should obviously be changed to random later
-    while room_code.upper() in rooms:
-        room_code = str(util.generate_room_code())
-    room_code = room_code.upper()
-    new_room = Room(room_code)
-    rooms[room_code] = new_room
-    print("Created room " + room_code)
-    print("User info======" + util.get_user_info())
-    return redirect(host + "" + room_code + "")
+        return render_template('index.html')
 
 @app.route('/<room_code>', methods=['GET', 'POST']) # Reached with <host>/<room_code>
 def join_room(room_code):
     room_code = room_code.upper()
     print(room_code)
     print(rooms)
+    if request.method == 'POST':
+        print('hi')
+        f = request.files['file']
+        name = room_code + "/" + f.filename
+        print(name)
+        f.save(secure_filename(name))
+        #print(tempfile.gettempdir())
+        return 'success! :o'
     if room_code in rooms:
         room = rooms[room_code]
         return render_template('room.html', room = room)
     else:
         return render_template('404.html')
 
+
+
+
+
+
 # Other methods
 @socketio.on('my event')
 def test_message(message):
+    print('hello')
     emit('my response', {'data': 'got it!'})
 
 @socketio.on('message')

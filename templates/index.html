@@ -453,22 +453,12 @@ a:visited, a:link {
 
   <div class="container">
     <div id="groupContainer">
-      <h2> Room Code: {{room.room_code}} </h2> <!--{{room.room_code}}-->
-      <form id="upload" action="#" method="POST" enctype="multipart/form-data">
-    <input id="file" type="file" name="file"/>
-    <input type="submit" value="Upload File"/>
+      <h2> Enter Room</h2>
+      <button method="POST">
+      <form id="group" action="#" method="POST" enctype="multipart/form-data">
+      <input id="file" type="text" value="Enter room name (leave blank for new room)" name="file"/>
+      <input type="submit" value="Join Room"/>
     </form>
-      <ul id="item-list">
-        {%for group in groups%}
-          <li class="item">
-            <img src="{{group.picture.url}}" alt="no image"/>
-            <div>
-              <a class="item-name" href="#">{{group.name}}</a>
-              <p class="item-category">{{group.info}}</p>
-            </div>
-          </li>
-        {%endfor%}
-      </ul>
     </div>
   </div>
 
