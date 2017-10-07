@@ -1,5 +1,6 @@
 import util
 from room import Room
+from client import Client
 from flask import Flask, request, render_template, redirect
 try:
     from urllib.parse import urlparse  # Python 3

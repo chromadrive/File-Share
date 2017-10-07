@@ -11,12 +11,9 @@ def randomWordList():
 	return WORDS
 
 def generate_room_code():
-	return random.choice(randomWordList())
+	return random.choice(randomWordList()).decode("utf-8")
 
 def get_user_info():
 	user_agent = request.headers.get('User-Agent')
 	return user_agent
-
-
-
 
