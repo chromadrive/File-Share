@@ -1,5 +1,7 @@
 import requests
 import random
+from flask import request
+
 
 
 def randomWordList():
@@ -10,6 +12,11 @@ def randomWordList():
 
 def generate_room_code():
 	return random.choice(randomWordList())
+
+def get_user_info():
+	user_agent = request.headers.get('User-Agent')
+	return user_agent
+
 
 
 

@@ -21,6 +21,7 @@ def index():
     new_room = Room(room_code)
     rooms[room_code] = new_room
     print("Created room " + room_code)
+    print("User info======" + util.get_user_info())
     return redirect(host + "" + room_code + "")
 
 @app.route('/<room_code>') # Reached with <host>/<room_code>
