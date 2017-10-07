@@ -18,8 +18,8 @@ class Room:
     		del self.fileDict[key]
     	self.files = listFiles()
 
-    def addFile(self, key, fileName):
-    	self.fileDict[key] = fileName
+    def addFile(self, key, filePath):
+    	self.fileDict[key] = filePath
     	self.files = listFiles()
 
 
