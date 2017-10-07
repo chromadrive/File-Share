@@ -459,7 +459,7 @@ a:visited, a:link {
     <input type="submit" value="Upload File"/>
     </form>
       <ul id="item-list">
-        {%for group in groups%}
+        {%for file in room.files%}
           <li class="item">
             <img src="{{group.picture.url}}" alt="no image"/>
             <div>

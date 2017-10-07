@@ -56,6 +56,7 @@ def join_room(room_code):
         name = room_code + "" + f.filename
         print(name)
         f.save(secure_filename(name))
+        room.addFile()
         #print(tempfile.gettempdir())
         return render_template('room.html', room = room)
     if room_code in rooms:
