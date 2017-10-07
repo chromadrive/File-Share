@@ -1,3 +1,4 @@
+from room import Room
 from flask import Flask, request, render_template, redirect
 try:
     from urllib.parse import urlparse  # Python 3
@@ -8,15 +9,23 @@ host = 'http://localhost:5000/' # Change for deployment
 
 app = Flask(__name__)
 
+rooms = {}
+
 @app.route('/', methods=['GET'])
 def index():
-    # create_room()
-    # redirect_to_room()
+    room_code = "TEST" # for testing, should obviously be changed to random later
+    new_room = Room(room_code)
+    rooms[room_code] = new_room
+    print("Created room " + room_code)
+    return redirect(host + "" + room_code + "")
 
 @app.route('/<room_code>') # Reached with <host>/<room_code>
-def redirect_short_url(room_code):
-    # do_some_stuff_if_room_exists()
-    # 404_if_room_doesnt_exist
+def join_room(room_code):
+    print(room_code)
+    if room_code in rooms:
+        return render_template('room.html')
+    else:
+        return render_template('404.html')
 
 # Other methods
 
