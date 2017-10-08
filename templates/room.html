@@ -27,34 +27,34 @@
               <div class="row">
                 <div class="col-md-12">
 
-                  {% if (len(room.users) == 1) %}
+                  {% if (room.users|length == 1) %}
                   <!-- 1 Element !-->
                   <div class="row">
                     <div class="text-center col-md-4"></div>
                     <div class="col-md-4 text-center">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/BukXlhd.png" width="80" height="80">
-                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[0]}}"type="button" name="button" value="{{room.users[0]}}">{{user}}</button>
+                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[0]}}"type="button" name="button" value="{{room.users[0]}}">{{room.users[0]}}</button>
                     </div>
                     <div class="text-center col-md-4"></div>
                   </div>
                   {% endif %}
                   <!-- 2 Elements !-->
-                  {% if (len(room.users) == 2) %}
+                  {% if (room.users|length == 2) %}
                   <div class="row">
                     <div class="text-center col-md-4"></div>
                     <div class="text-center col-md-2">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/BukXlhd.png" width="80" height="80">
-                      <a class="btn btn-primary text-center btn-sm" href="">Button </a>
+                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[0]}}"type="button" name="button" value="{{room.users[0]}}">{{room.users[0]}}</button>
                     </div>
                     <div class="text-center col-md-2">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/OBjMpY9.png" width="80" height="80">
-                      <a class="btn btn-primary text-center btn-sm" href="">Button </a>
+                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[1]}}"type="button" name="button" value="{{room.users[1]}}">{{room.users[1]}}</button>
                     </div>
                     <div class="text-center col-md-4"></div>
                   </div>
                   {% endif %}
                   <!-- 3 Elements !-->
-                  {% if (len(room.users) == 3) %}
+                  {% if (room.users|length == 3) %}
                   <div class="row">
                     <div class="text-center col-md-3"></div>
                     <div class="col-md-2 text-center">
@@ -73,7 +73,7 @@
                   </div>
                   {% endif %}
                   <!-- 4 Elements !-->
-                  {% if (len(room.users) == 4) %}
+                  {% if (room.users|length == 4) %}
                   <div class="row">
                     <div class="col-md-2 text-center"></div>
                     <div class="col-md-2 text-center">
