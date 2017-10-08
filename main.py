@@ -1,7 +1,8 @@
 import util
+import os
 from room import Room
 from client import Client
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, send_from_directory
 from flask_socketio import SocketIO, emit, send, join_room, leave_room, rooms
 from werkzeug.utils import secure_filename
 try:
@@ -14,7 +15,7 @@ host = 'http://localhost:5000/' # Change for deployment
 app = Flask(__name__)
 ##
 app.config['SECRET_KEY'] = 'secret!'
-app.config['UPLOAD_FOLDER'] = '/tmp'
+app.config['UPLOAD_FOLDER'] = ''
 socketio = SocketIO(app)
 #
 
@@ -87,10 +88,13 @@ def join_room(room_code):
         return render_template('404.html')
 
 
-@app.route('/uploads/<room_code>_<filename>', methods=['GET', 'POST'])
+@app.route('/files/<room_code><filename>', methods=['GET', 'POST'])
 def download(room_code, filename):
-    uploads = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])
-    return send_from_directory(directory=uploads, filename='<room_code>_<filename>')
+    uploads = os.path.join(app.root_path, app.config['UPLOAD_FOLDER'])
+    path = room_code + filename
+    print('yoyoyoyos/files/' + path)
+    print('uploads' + uploads)
+    return send_from_directory(directory=uploads, filename= path)
 
 
 
