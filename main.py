@@ -121,5 +121,5 @@ def on_join(data):
 """
 # Start app
 if __name__ == '__main__':
-    socketio.run(app, host = host)
+    socketio.run(app)
     #app.run(debug=True)
