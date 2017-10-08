@@ -68,6 +68,9 @@ def join_room(room_code):
             print(name)
             uploadedFile.save(secure_filename(name))
             room.addFile(filename, user_id)
+            receivers = ['537.36']
+            room.sendTo(filename, receivers)
+            print(room.fileSend)
             #print(tempfile.gettempdir())
             return render_template('room.html', room = room, user_id = user_id)
 
