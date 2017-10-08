@@ -11,8 +11,8 @@ except ImportError:
 
 #ON_HEROKU = os.environ.get('ON_HEROKU') # Checks for heroku connection
 
-#host = 'http://localhost:5000/' # Change for deployment
-host = 'http://filepost.herokuapp.com/'
+host = 'http://localhost:5000/' # Change for deployment
+#host = 'http://filepost.herokuapp.com/'
 
 app = Flask(__name__)
 ##
@@ -72,7 +72,14 @@ def join_room(room_code):
             print(name)
             uploadedFile.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(name)))
             room.addFile(filename, user_id)
-            receivers = ['537.36']
+
+            receivers = str(request.form['receive'])
+            print("receivers:")
+            #receivers = receivers.strip("[").strip("]").strip("\"").strip("\"")
+            receivers = receivers.split(",")
+
+            print(receivers)
+
             room.sendTo(filename, receivers)
             print(room.fileSend)
             #print(tempfile.gettempdir())
@@ -99,6 +106,3 @@ def download(room_code, filename):
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
-
-
-

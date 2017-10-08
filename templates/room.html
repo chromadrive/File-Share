@@ -5,7 +5,54 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> 
+  <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
+  <style>
+    .btn-user {
+      color: #ffffff;
+      background-color: #428BCA;
+      border-color: #428BCA;
+    }
+
+    .btn-user:hover,
+    .btn-user:focus,
+    .btn-user:active,
+    .btn-user.active,
+    .open .dropdown-toggle.btn-user {
+      color: #ffffff;
+      background-color: #104E85;
+      border-color: #428BCA;
+    }
+
+    .btn-user:active,
+    .btn-user.active,
+    .open .dropdown-toggle.btn-user {
+      background-image: none;
+    }
+
+    .btn-user.disabled,
+    .btn-user[disabled],
+    fieldset[disabled] .btn-user,
+    .btn-user.disabled:hover,
+    .btn-user[disabled]:hover,
+    fieldset[disabled] .btn-user:hover,
+    .btn-user.disabled:focus,
+    .btn-user[disabled]:focus,
+    fieldset[disabled] .btn-user:focus,
+    .btn-user.disabled:active,
+    .btn-user[disabled]:active,
+    fieldset[disabled] .btn-user:active,
+    .btn-user.disabled.active,
+    .btn-user[disabled].active,
+    fieldset[disabled] .btn-user.active {
+      background-color: #428BCA;
+      border-color: #428BCA;
+    }
+
+    .btn-user .badge {
+      color: #428BCA;
+      background-color: #ffffff;
+    }
+  </style>
   <title>{{room.room_code}} | FilePost</title>
   </head>
 
@@ -26,6 +73,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-12">
+                <marked>
 
                   {% if (room.users|length == 1) %}
                   <!-- 1 Element !-->
@@ -33,7 +81,7 @@
                     <div class="text-center col-md-4"></div>
                     <div class="col-md-4 text-center">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/BukXlhd.png" width="80" height="80">
-                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[0]}}" type="button" name="button" value="{{room.users[0]}}">{{room.users[0]}}</button>
+                      <button class="btn btn-user text-center btn-sm" id="user1" type="button" name="button" value="{{room.users[0]}}">{{room.users[0]}}</button>
                     </div>
                     <div class="text-center col-md-4"></div>
                   </div>
@@ -44,11 +92,11 @@
                     <div class="text-center col-md-4"></div>
                     <div class="text-center col-md-2">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/BukXlhd.png" width="80" height="80">
-                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[0]}}" type="button" name="button" value="{{room.users[0]}}">{{room.users[0]}}</button>
+                      <button class="btn btn-user text-center btn-sm" id="user1" type="button" name="button" value="{{room.users[0]}}">{{room.users[0]}}</button>
                     </div>
                     <div class="text-center col-md-2">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/OBjMpY9.png" width="80" height="80">
-                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[1]}}" type="button" name="button" value="{{room.users[1]}}">{{room.users[1]}}</button>
+                      <button class="btn btn-user text-center btn-sm" id="user2" type="button" name="button" value="{{room.users[1]}}">{{room.users[1]}}</button>
                     </div>
                     <div class="text-center col-md-4"></div>
                   </div>
@@ -59,15 +107,15 @@
                     <div class="text-center col-md-3"></div>
                     <div class="col-md-2 text-center">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/BukXlhd.png" width="80" height="80">
-                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[0]}}" type="button" name="button" value="{{room.users[0]}}">{{room.users[0]}}</button>
+                      <button class="btn btn-user text-center btn-sm" id="user1" type="button" name="button" value="{{room.users[0]}}">{{room.users[0]}}</button>
                     </div>
                     <div class="col-md-2 text-center">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/OBjMpY9.png" width="80" height="80">
-                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[1]}}" type="button" name="button" value="{{room.users[1]}}">{{room.users[1]}}</button>
+                      <button class="btn btn-user text-center btn-sm" id="user2" type="button" name="button" value="{{room.users[1]}}">{{room.users[1]}}</button>
                     </div>
                     <div class="col-md-2 text-center">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/rpJeoUp.png" width="80" height="80">
-                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[2]}}" type="button" name="button" value="{{room.users[2]}}">{{room.users[2]}}</button>
+                      <button class="btn btn-user text-center btn-sm" id="user3" type="button" name="button" value="{{room.users[2]}}">{{room.users[2]}}</button>
                     </div>
                     <div class="text-center col-md-3"></div>
                   </div>
@@ -78,23 +126,23 @@
                     <div class="col-md-2 text-center"></div>
                     <div class="col-md-2 text-center">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/BukXlhd.png" width="80" height="80">
-                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[0]}}" type="button" name="button" value="{{room.users[0]}}">{{room.users[0]}}</button>
+                      <button class="btn btn-user text-center btn-sm" id="user1" type="button" name="button" value="{{room.users[0]}}">{{room.users[0]}}</button>
                     </div>
                     <div class="col-md-2 text-center">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/OBjMpY9.png" width="80" height="80">
-                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[1]}}" type="button" name="button" value="{{room.users[1]}}">{{room.users[1]}}</button>
+                      <button class="btn btn-user text-center btn-sm" id="user2" type="button" name="button" value="{{room.users[1]}}">{{room.users[1]}}</button>
                     </div>
                     <div class="col-md-2 text-center">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/rpJeoUp.png" width="80" height="80">
-                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[2]}}" type="button" name="button" value="{{room.users[2]}}">{{room.users[2]}}</button>
+                      <button class="btn btn-user text-center btn-sm" id="user3" type="button" name="button" value="{{room.users[2]}}">{{room.users[2]}}</button>
                     <div class="col-md-2 text-center">
                       <img class="img-fluid d-block mx-auto p-2" src="https://i.imgur.com/GmNHKP7.png" width="80" height="80">
-                      <button class="btn btn-primary text-center btn-sm" id="{{room.users[3]}}" type="button" name="button" value="{{room.users[3]}}">{{room.users[3]}}</button>
+                      <button class="btn btn-user text-center btn-sm" id="user4" type="button" name="button" value="{{room.users[3]}}">{{room.users[3]}}</button>
                     </div>
                   </div>
                   {% endif %}
 
-
+                </marked>
                 </div>
               </div>
             </div>
@@ -110,11 +158,12 @@
             <!-- Form !-->
             <form id="upload" action="#" method="POST" enctype="multipart/form-data">
               <div class="row">
-                <div class="p-3 align-self-center col-md-10">
+                <div class="p-3 align-self-center col-md-8">
                   <input id="file" type="file" name="file"/>
+                  <input name="receive" id="hidden_info" type="text" value="hi" style="display:none"/>
                 </div>
-                <div class="p-3 align-self-center col-md-2">
-                  <input class="btn w-100 btn-primary" type="submit" value="Upload File"/>
+                <div class="p-3 align-self-center col-md-4">
+                  <input id="submit" class="btn w-100 btn-primary" type="submit" value="Upload File"/>
                 </div>
               </div>
             </div>
@@ -129,7 +178,8 @@
 
       {% for filename, receivers in room.fileSend.items() %}
         {% for receiver in receivers %}
-          {% if (user_id == receiver) %}
+          {% if (user_id != room.fileDict[filename]) %}
+            {% if (user_id == receiver) %}
             <div class="row">
               <div class="col-md-12">
                 <div class="alert alert-primary" role="alert">
@@ -145,30 +195,158 @@
             </div>
             <br>
           {% endif %}
+          {% endif %}
         {% endfor %}
       {% endfor %}
     </div>
   </div>
-  <script>
-  $(document).ready(function() {
 
-    $("button").click(function() {
-      if (this.style.backgroundColor != "aqua") {
-        $(this).css("background-color", "aqua");
-      } else {
-        $(this).css("background-color", "silver");
-      }
-
-    });
-  });
-
-  </script>
   <script src="https://rawgit.com/emn178/js-md5/master/build/md5.min.js"></script>
 
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  <script>
+  $(document).ready(function() {
+
+
+  $("div marked button").click(function() {
+    $(this).toggleClass("active");
+  });
+  $("#submit").click(function() {
+      var elements = document.querySelectorAll("div marked button");
+      var len = elements.length;
+      var receivers = "";
+      var all = "";
+      var count = 0;
+      for (var i = 0; i < len; i++) {
+        elemid = "#user" + (i+1);//'{{room.users[i]}}';//$(elements[i]).attr('id');
+        //$(alert('{{room.users[i]}}'));
+        if ($(elemid).hasClass("active")) {
+          receivers += $(elements[i]).val() + ",";
+
+          //receivers.push($(elements[i]).val());
+          count += 1;
+        }
+        all += $(elements[i]).val() + ",";
+        //all.push($(elements[i]).val());
+      } //$(alert(receivers));
+
+      if (count == 0) {
+        //var json_string = JSON.stringify(all);
+        var string = all;
+        //var json_string = JSON.stringify(all, null, '/t');
+      } else {
+        //var json_string = JSON.stringify(receivers);
+        var string = receivers;
+        //var json_string = JSON.stringify(receivers, null, '/t');
+      }
+
+      $("#hidden_info").val(string);
+
+
+
+    //   $.post('/HELLO',
+    //   {
+    //       name: "Donald Duck",
+    //       city: "Duckburg"
+    //   },
+    //   function(data, status){
+    //       alert("Data: " + data + "\nStatus: " + status);
+    //   });
+    // )
+      // $.ajax({
+      //   type: 'POST',
+      //   contentType: "application/json",
+      //   url: url,
+      //   dataType: 'json',
+      //   data: JSON.stringify({
+      //   'foo': 'bar',
+      //   'calibri': 'nolibri' // <-- the $ sign in the parameter name seems unusual, I would avoid it
+      // }),
+      //   success: function() {
+      //     $(alert("It sends"));
+      //   },
+      //   error: function() {
+      //     $(alert(":("));
+      //   }
+      //
+      // });
+
+
+      // document.getElementById("#submit_receivers").submit();
+
+
+
+      // $.ajax({
+      //   type: "POST",
+      //   url: '/HELLO',// + room.room_code,//window.location.href,//'localhost:5000/' + room.room_code,
+      //   data: JSON.stringify({"hello": "value"}),
+      //   contentType: "application/json;charset=UTF-8",
+      //   dataType: 'json'
+      //});
+  });
+
+
+
+});
+  // $(document).ready(function() {
+  //
+  //   /*$("button").click(function() {
+  //     if (this.style.backgroundColor != "aqua") {
+  //       $(this).css("background-color", "aqua");
+  //     } else {
+  //       $(this).css("background-color", "silver");
+  //     }
+  //   });*/
+  //   $(alert("hello"));
+  //   $("button").click(function () {
+  //       $(this).toggleClass("active");
+  //   });
+  //
+  //   /*$("button").click(function() {
+  //   if (this.style.backgroundColor != "aqua") {
+  //     $(this).css("background-color", "aqua");
+  //   } else {
+  //     $(this).css("background-color", "silver");
+  //   }*/
+  //
+  // $("#submit").click(function() {
+  //     var elements = document.querySelectorAll("button");
+  //     $(alert(elements));
+  //     var len = elements.length;
+  //     $(alert("hi"));
+  //     var receivers = "";
+  //     var all = "";
+  //     var count = 0;
+  //     for (var i = 0; i < len; i++) {
+  //       if (elements[i].hasClass("active")) {
+  //         //receivers.push($(elements[i]).val());
+  //         receivers += $(elements[i]).val() + ",";
+  //         $(alert(elements[i]).val()));
+  //         count += 1;
+  //       }
+  //       all += $(elements[i]).val() + ",";
+  //       //all.push($(elements[i]).val());
+  //     } //$(alert(receivers));
+  //     if (count == 0) {
+  //       //var json_string = JSON.stringify(all);
+  //       var string = receivers;
+  //       //var json_string = JSON.stringify(all, null, '/t');
+  //     } else {
+  //       //var json_string = JSON.stringify(receivers);
+  //       var string = all;
+  //       //var json_string = JSON.stringify(receivers, null, '/t');
+  //     }
+  //     //$(alert("hi"));
+  //     //$(alert(json_string));
+  //     $("#hidden_info").val(string);
+  //     //$(alert("hi"));
+  //   });
+  // });
+
+</script>
 </body>
 
 </html>
