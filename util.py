@@ -5,7 +5,7 @@ from flask import request
 id_dict= {}
 
 def randomWordList():
-	word_site = "https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-usa-no-swears-medium.txt"
+	word_site = "http://gist.githubusercontent.com/chromadrive/ec81de2c59c7f9ffb2115205fe490876/raw/8cdc4e3fd3aae5fea395cdb556ba9d2be2f7a201/common_words.txt"
 	response = requests.get(word_site)
 	WORDS = response.content.splitlines()
 	return WORDS
@@ -14,7 +14,7 @@ def generate_room_code():
 	return random.choice(randomWordList()).decode("utf-8")
 
 def randomIdList():
-	word_site = "https://raw.githubusercontent.com/chromadrive/File-Share/master/PokemonList.txt"
+	word_site = "http://gist.githubusercontent.com/chromadrive/2188d4a82914b7032236fc55ee8c57f6/raw/a907484c2f57c053574d283c662f0514dc0f943a/berkeley_buildings.txt"
 	response = requests.get(word_site)
 	WORDS = response.content.splitlines()
 	return WORDS
