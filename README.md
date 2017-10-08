@@ -6,5 +6,6 @@ FilePost is a file sharing service built to be quick and personal. Rather than t
 ## Runnning the Server
 Change the `host` variable in `main.py` to whatever host you're using, then run
 ```
+pip3 install -r requirements.txt
 python3 main.py
 ```
