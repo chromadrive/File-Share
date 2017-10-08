@@ -505,7 +505,7 @@ input {
             <li class="item">
               <p class="item-category">sender:{{ room.fileDict[filename] }}</p>
               <p class="item-category">{{ filename }}</p>
-              <a href="/files/{{room.room_code}}{{filename}}" download>Download</a>
+              <a href="/files/{{room.room_code}}_{{filename}}" download>Download</a>
             </li>
             {% endif %}
           {% endfor %}

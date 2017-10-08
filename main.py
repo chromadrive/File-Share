@@ -14,8 +14,9 @@ host = 'http://localhost:5000/' # Change for deployment
 
 app = Flask(__name__)
 ##
+UPLOAD_FOLDER = ''
 app.config['SECRET_KEY'] = 'secret!'
-app.config['UPLOAD_FOLDER'] = ''
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 socketio = SocketIO(app)
 #
 
@@ -65,9 +66,9 @@ def join_room(room_code):
         if request.method == 'POST':
             uploadedFile = request.files['file']
             filename = uploadedFile.filename
-            name = room_code + "" + filename
+            name = room_code + "_" + filename
             print(name)
-            uploadedFile.save(secure_filename(name))
+            uploadedFile.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(name)))
             room.addFile(filename, user_id)
             receivers = ['537.36']
             room.sendTo(filename, receivers)
@@ -88,10 +89,10 @@ def join_room(room_code):
         return render_template('404.html')
 
 
-@app.route('/files/<room_code><filename>', methods=['GET', 'POST'])
+@app.route('/files/<room_code>_<filename>', methods=['GET', 'POST'])
 def download(room_code, filename):
     uploads = os.path.join(app.root_path, app.config['UPLOAD_FOLDER'])
-    path = room_code + filename
+    path = room_code + "_" + filename
     print('yoyoyoyos/files/' + path)
     print('uploads' + uploads)
     return send_from_directory(directory=uploads, filename= path)
