@@ -499,15 +499,16 @@ input {
     <input type="submit" value="Upload File"/>
     </form>
       <ul id="item-list">
-        {% for filename, sender in room.fileDict.iteritems() %}
-          {% if (user_id  != sender) %}
+        {% for filename, receivers in room.fileSend.iteritems() %}
+          {% for receiver in receivers %}
+            {% if (user_id == receiver) %}
             <li class="item">
-              <p class="item-category">sender:{{ sender }}</p>
-              <p class="item-category">user_id:{{ user_id }}</p>
+              <p class="item-category">sender:{{ room.fileDict[filename] }}</p>
               <p class="item-category">{{ filename }}</p>
               <a href="{{room.room_code}}{{filename}}" download>
             </li>
-          {% endif %}
+            {% endif %}
+          {% endfor %}
         {% endfor %}
       </ul>
     </div>

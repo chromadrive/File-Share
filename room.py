@@ -5,6 +5,7 @@ class Room:
     def __init__(self, code):
         self.room_code = code
         self.fileDict = {}
+        self.fileSend = {}
         self.users = []
         #self.files = []
         """
@@ -22,7 +23,16 @@ class Room:
 
     def addFile(self, filename, sender):
     	self.fileDict[filename] = sender
+        print('before')
+        self.fileSend[filename] = []
+        print('after')
     	#self.files = listFiles()
 
     def addUser(self, user):
     	self.users.append(user)
+
+    def sendTo(self, filename, receivers):
+        for afile in self.fileSend:
+            if afile == filename:
+                for receiver in receivers:
+                    self.fileSend.setdefault(afile, []).append(receiver)
