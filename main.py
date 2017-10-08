@@ -3,14 +3,13 @@ import os
 from room import Room
 from client import Client
 from flask import Flask, request, render_template, redirect, send_from_directory
-from flask_socketio import SocketIO, emit, send, join_room, leave_room, rooms
 from werkzeug.utils import secure_filename
 try:
     from urllib.parse import urlparse  # Python 3
 except ImportError:
     from urlparse import urlparse  # Python 2 (ugh)
 
-ON_HEROKU = os.environ.get('ON_HEROKU') # Checks for heroku connection
+#ON_HEROKU = os.environ.get('ON_HEROKU') # Checks for heroku connection
 
 #host = 'http://localhost:5000/' # Change for deployment
 host = 'http://filepost.herokuapp.com/'
@@ -20,7 +19,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = ''
 app.config['SECRET_KEY'] = 'secret!'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-socketio = SocketIO(app)
+#socketio = SocketIO(app)
 #
 
 rooms = {}
@@ -79,11 +78,6 @@ def join_room(room_code):
             #print(tempfile.gettempdir())
             return render_template('room.html', room = room, user_id = user_id)
 
-    #if request.method == 'GET':
-    	#print('getting')
-        #if 'submit' in request.form:
-        	#fileget = request.form['submit']
-        	#return redirect(host + "" + room_code + "/" + fileget)
     if room_code in rooms:
         room = rooms[room_code]
         user_id = util.get_user_id()
@@ -101,33 +95,6 @@ def download(room_code, filename):
     return send_from_directory(directory=uploads, filename= path)
 
 
-
-
-# Other methods
-@socketio.on('my event')
-def test_message(message):
-    print('hello')
-    emit('my response', {'data': 'got it!'})
-
-@socketio.on('message')
-def handle_message(message):
-    send(message)
-
-"""
-@socketio.on('join')
-def on_join(data):
-    for room in rooms:
-        username = data['username']
-        if data['room_code'] == room.room_code:
-            join_room(room)
-            send(username + 'has entered the room.', room=room)
-"""
 # Start app
 if __name__ == '__main__':
-    if ON_HEROKU:
-        # get the heroku port
-        port = int(os.environ.get('PORT', 17995))  # as per OP comments default is 17995
-        socketio.run(app, host = host, port = port, debug=True)   
-    else:
-        socketio.run(app, host = '127.0.0.1', port = 5000)
-    #app.run(debug=True)
+    app.run(debug=True)
