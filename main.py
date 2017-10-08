@@ -10,8 +10,8 @@ try:
 except ImportError:
     from urlparse import urlparse  # Python 2 (ugh)
 
-host = 'https://dry-tundra-10664.herokuapp.com/' # Change for deployment
-
+#host = 'https://dry-tundra-10664.herokuapp.com/' # Change for deployment
+host = 'https://dry-tundra-10664.herokuapp.com/'
 app = Flask(__name__)
 ##
 UPLOAD_FOLDER = ''
@@ -121,5 +121,5 @@ def on_join(data):
 """
 # Start app
 if __name__ == '__main__':
-    socketio.run(app, host = 'https://dry-tundra-10664.herokuapp.com/')
+    socketio.run(app)
     #app.run(debug=True)
