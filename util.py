@@ -17,3 +17,8 @@ def get_user_info():
 	user_agent = request.headers.get('User-Agent')
 	return user_agent
 
+def get_user_id():
+	user_agent = request.headers.get('User-Agent')
+	user_info = user_agent.split("/")
+	user_id = user_info[-1]
+	return user_id

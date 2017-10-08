@@ -24,10 +24,10 @@ rooms = {}
 @app.route('/', methods=['GET', 'POST'])
 def index():
         if request.method == 'POST':
-            result = request.form
-            groupname = result['file']
-            print(groupname)
-            if (groupname == ""):
+            which = request.form['submit']
+            print(which)
+            if which == 'New Room':
+                #if (groupname == ""):
                 room_code = str(util.generate_room_code()) # for testing, should obviously be changed to random later
             #while room_code.upper() in rooms:
             #    room_code = str(util.generate_room_code())
@@ -35,33 +35,41 @@ def index():
                 new_room = Room(room_code)
                 rooms[room_code] = new_room
                 print("Created room " + room_code)
-                print("User info======" + util.get_user_info())
+                print("User info======" + util.get_user_id())
                 return redirect(host + "" + room_code + "")
-            else:
+            elif which == 'Join Room':
+                result = request.form
+                print(result)
+                groupname = result['file']
+                print(groupname)
+                groupname = groupname.upper()
                 if groupname in rooms:
                     return redirect(host + "" + groupname + "")
                 else:
-                    return "no group with that name found :("
+                    return render_template('index.html', no_group = "True")
 
-        return render_template('index.html')
+        return render_template('index.html', no_group = "")
 
 @app.route('/<room_code>', methods=['GET', 'POST']) # Reached with <host>/<room_code>
 def join_room(room_code):
-    
-    room_code = room_code.upper().decode("utf-8")
-    room = rooms[room_code]
-    print(room_code)
-    print(rooms)
-    if request.method == 'POST':
-        uploadedFile = request.files['file']
-        filename = uploadedFile.filename
-        name = room_code + "" + filename
-        print(name)
-        uploadedFile.save(secure_filename(name))
-        user_id = util.get_user_info()
-        room.addFile(filename, user_id)
-        #print(tempfile.gettempdir())
-        return render_template('room.html', room = room, user_id = user_id)
+    room_code = str(room_code.upper()) #.decode("utf-8")
+    if room_code in rooms:
+        room = rooms[room_code]
+        user_id = str(util.get_user_id())
+        if user_id not in room.users:
+            room.addUser(user_id)
+            print(room.users)
+        print(room_code)
+        print(rooms)
+        if request.method == 'POST':
+            uploadedFile = request.files['file']
+            filename = uploadedFile.filename
+            name = room_code + "" + filename
+            print(name)
+            uploadedFile.save(secure_filename(name))
+            room.addFile(filename, user_id)
+            #print(tempfile.gettempdir())
+            return render_template('room.html', room = room, user_id = user_id)
 
     #if request.method == 'GET':
     	#print('getting')
@@ -70,7 +78,7 @@ def join_room(room_code):
         	#return redirect(host + "" + room_code + "/" + fileget)
     if room_code in rooms:
         room = rooms[room_code]
-        user_id = util.get_user_info()
+        user_id = util.get_user_id()
         return render_template('room.html', room = room, user_id = user_id)
     else:
         return render_template('404.html')

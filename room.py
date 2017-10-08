@@ -5,6 +5,7 @@ class Room:
     def __init__(self, code):
         self.room_code = code
         self.fileDict = {}
+        self.users = []
         #self.files = []
         """
     def listFiles(self):
@@ -22,3 +23,6 @@ class Room:
     def addFile(self, filename, sender):
     	self.fileDict[filename] = sender
     	#self.files = listFiles()
+
+    def addUser(self, user):
+    	self.users.append(user)

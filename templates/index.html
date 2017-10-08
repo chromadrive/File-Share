@@ -159,6 +159,16 @@ a:visited, a:link {
   background: #F3BB43;
 }
 
+#join, #new {
+  height: 30%;
+  margin-top: 30px;
+  width: 100%;
+}
+
+
+
+
+
 #wrapper {
   width: 100%;
   height: 100vh;
@@ -454,11 +464,19 @@ a:visited, a:link {
   <div class="container">
     <div id="groupContainer">
       <h2> Enter Room</h2>
-      <button method="POST">
       <form id="group" action="#" method="POST" enctype="multipart/form-data">
-      <input id="file" type="text" value="Enter room name (leave blank for new room)" name="file"/>
-      <input type="submit" value="Join Room"/>
+      <div id="new">
+        Click to get a room:
+        <input type="submit" value="New Room" name="submit" />
+      </div>
+      <div id="join">
+        <input type="text" value="Enter room name" name="file" onfocus="if (this.value=='Enter room name') this.value='';"/>
+        <input type="submit" value="Join Room" name="submit"/>
+      </div>
     </form>
+    {% if (no_group) %}
+        <p class="item-category">No group with the name {{ filename }}</p>
+    {% endif %}
     </div>
   </div>
 

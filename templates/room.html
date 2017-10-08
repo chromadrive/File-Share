@@ -5,7 +5,7 @@
   <meta name="description" content="Cuotiben">
   <meta name="author" content="Your Name">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cuotiben - Groups</title>
+  <title>{{room.room_code}}</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!---<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -59,6 +59,18 @@ a:visited, a:link {
   text-decoration: none;
   color: black;
 
+}
+
+button {
+  border: none;
+  outline: none;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+}
+
+input {
+  outline: none;
 }
 /**
  * top header
@@ -291,13 +303,34 @@ a:visited, a:link {
  * item list
  */
 #item-list {
-  color:       #F0F0F0;
+  color:       black;
   list-style:  none;
   padding:     10px;
   margin:    30px auto;
   width: 100%;
   min-width: 600px;
   height: 100%;
+}
+
+#user-list {
+  color:       black;
+  list-style:  none;
+  padding:     10px;
+  margin:    30px auto;
+  width: 100%;
+  min-width: 600px;
+  height: 100%;
+}
+.user {
+
+  float: left;
+  width: 20%;
+  height: 100%;
+  margin-right: 5px;
+}
+
+#item-list p {
+  color: black;
 }
 
 #item-list .notice {
@@ -311,10 +344,10 @@ a:visited, a:link {
  */
 .item {
   align-items:   center;
-  display:       flex;
+  color: black;
   margin-top:    40px;
   padding:       40px;
-  transition:    background-color 100ms linear;
+
 }
 
 .item:last-child {
@@ -454,17 +487,25 @@ a:visited, a:link {
   <div class="container">
     <div id="groupContainer">
       <h2> Room Code: {{room.room_code}} </h2> <!--{{room.room_code}}-->
-      <form id="upload" action="#" method="POST" enctype="multipart/form-data">
+      <div id="user-list">
+      {% for user in room.users %}
+          <div class="user">
+            <button id="{{user}}"type="button" name="button" value="{{user}}">{{user}}</button>
+          </div>
+      {% endfor %}
+    </div>
+    <form id="upload" action="#" method="POST" enctype="multipart/form-data">
     <input id="file" type="file" name="file"/>
     <input type="submit" value="Upload File"/>
     </form>
       <ul id="item-list">
         {% for filename, sender in room.fileDict.iteritems() %}
-          {% if sender != 'hi' %}
+          {% if (user_id  != sender) %}
             <li class="item">
               <p class="item-category">sender:{{ sender }}</p>
               <p class="item-category">user_id:{{ user_id }}</p>
-                <p class="item-category">{{ filename }}</p>
+              <p class="item-category">{{ filename }}</p>
+              <a href="{{room.room_code}}{{filename}}" download>
             </li>
           {% endif %}
         {% endfor %}
@@ -473,5 +514,22 @@ a:visited, a:link {
   </div>
 
 </div>
+
+<script>
+$(document).ready(function() {
+
+  $("button").click(function() {
+    if (this.style.backgroundColor != "aqua") {
+      $(this).css("background-color", "aqua");
+    } else {
+      $(this).css("background-color", "silver");
+    }
+
+  });
+});
+
+</script>
+<script src="https://rawgit.com/emn178/js-md5/master/build/md5.min.js"></script>
+
 </body>
 </html>
