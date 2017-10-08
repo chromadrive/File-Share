@@ -10,6 +10,7 @@ try:
 except ImportError:
     from urlparse import urlparse  # Python 2 (ugh)
 
+ON_HEROKU = os.environ.get('ON_HEROKU') # Checks for heroku connection
 
 #host = 'http://localhost:5000/' # Change for deployment
 host = 'http://filepost.herokuapp.com/'
@@ -123,5 +124,10 @@ def on_join(data):
 """
 # Start app
 if __name__ == '__main__':
-    socketio.run(app)
+    if ON_HEROKU:
+        # get the heroku port
+        port = int(os.environ.get('PORT', 17995))  # as per OP comments default is 17995
+        socketio.run(app, host = host, port = port, debug=True)   
+    else:
+        socketio.run(app, host = '127.0.0.1', port = 5000)
     #app.run(debug=True)
