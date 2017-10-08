@@ -39,15 +39,16 @@
               <h4 class="card-title text-center">Create or Join a Room</h4>
             </div>
             <div class="row">
-              <div class="col-md-2"></div>
               <div class="col-md-8">
+                <form id="group" action="#" method="POST" enctype="multipart/form-data">
                 <input class="btn btn-primary w-100" type="submit" value="New Room" name="submit" />
                 <div class="input-group">
                   <input type="text" name="file" class="form-control" >
                   <span class="input-group-btn">
                        <input class="btn btn-default"  type="submit" value="Join Room" name="submit"/>
                   </span>
-              </div>
+                </div>
+                </form>
               </div>
             </div>
             {% if (no_group) %}
