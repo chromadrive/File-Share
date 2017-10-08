@@ -10,7 +10,8 @@ try:
 except ImportError:
     from urlparse import urlparse  # Python 2 (ugh)
 
-host = 'http://localhost:5000/' # Change for deployment
+#host = 'http://localhost:5000/' # Change for deployment
+host = 'http://filepost.herokuapp.com/'
 
 app = Flask(__name__)
 ##
